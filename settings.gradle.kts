@@ -5,4 +5,5 @@ include(
     "dailyfeed-pagination-support",
     "dailyfeed-redis-support",
     "dailyfeed-member",
+    "dailyfeed-feign",
 )
