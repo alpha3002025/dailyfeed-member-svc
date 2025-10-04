@@ -16,3 +16,6 @@
 [submodule "dailyfeed-feign"]
 	path = dailyfeed-feign
 	url = https://github.com/alpha3002025/dailyfeed-feign.git
+[submodule "dailyfeed-kafka-support"]
+	path = dailyfeed-kafka-support
+	url = https://github.com/alpha3002025/dailyfeed-kafka-support.git
