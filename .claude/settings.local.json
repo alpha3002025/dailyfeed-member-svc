@@ -7,7 +7,9 @@
       "Bash(kubectl get:*)",
       "Bash(kubectl rollout restart:*)",
       "Bash(helm upgrade:*)",
-      "Bash(kubectl exec:*)"
+      "Bash(kubectl exec:*)",
+      "Bash(tar:*)",
+      "Bash(helm package:*)"
     ],
     "deny": [],
     "ask": []
