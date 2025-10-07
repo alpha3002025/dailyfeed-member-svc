@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(./gradlew:*)"
+      "Bash(./gradlew:*)",
+      "Bash(kubectl describe:*)",
+      "Bash(kubectl logs:*)",
+      "Bash(kubectl get:*)",
+      "Bash(kubectl rollout restart:*)",
+      "Bash(helm upgrade:*)",
+      "Bash(kubectl exec:*)",
+      "Bash(tar:*)",
+      "Bash(helm package:*)"
     ],
     "deny": [],
     "ask": []
