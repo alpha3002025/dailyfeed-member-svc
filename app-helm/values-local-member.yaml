@@ -2,6 +2,7 @@ imageTag: 0.0.2
 appName: dailyfeed-member
 replicas: 1
 profile: local
+portNumber: 8080
 envValues:
 - name: SERVER_PORT
   value: "8080"

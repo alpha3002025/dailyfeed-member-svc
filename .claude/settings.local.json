@@ -9,7 +9,10 @@
       "Bash(helm upgrade:*)",
       "Bash(kubectl exec:*)",
       "Bash(tar:*)",
-      "Bash(helm package:*)"
+      "Bash(helm package:*)",
+      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/**)",
+      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/app-helm/**)",
+      "Bash(kubectl delete:*)"
     ],
     "deny": [],
     "ask": []
