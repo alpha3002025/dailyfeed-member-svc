@@ -47,7 +47,7 @@ project(":dailyfeed-member") {
 
         // 타겟 이미지 설정
         to {
-            tags = setOf("0.0.2")
+            tags = setOf("0.0.3")
             image = "alpha300uk/dailyfeed-member-svc"
         }
 
