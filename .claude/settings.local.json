@@ -11,8 +11,7 @@
       "Bash(tar:*)",
       "Bash(helm package:*)",
       "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/**)",
-      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/app-helm/**)",
-      "Bash(kubectl delete:*)"
+      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/app-helm/**)"
     ],
     "deny": [],
     "ask": []
