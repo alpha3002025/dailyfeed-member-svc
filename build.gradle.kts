@@ -39,10 +39,10 @@ subprojects {
 
 project(":dailyfeed-member") {
     jib {
-        // Base 이미지 설정 (Java 17 기반)
+        // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
-            // Google의 distroless 이미지 사용 (인증 불필요)
-            image = "gcr.io/distroless/java17-debian12"
+            // Eclipse Temurin 이미지 사용 (bash 쉘 포함)
+            image = "eclipse-temurin:17-jre"
         }
 
         // 타겟 이미지 설정

@@ -11,7 +11,8 @@
       "Bash(tar:*)",
       "Bash(helm package:*)",
       "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/**)",
-      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/app-helm/**)"
+      "Read(//Users/alpha300uk/workspace/alpha300uk/0.toy-project/dailyfeed/project/dailyfeed-content-svc/app-helm/**)",
+      "Read(//private/tmp/dailyfeed-backend-chart/templates/**)"
     ],
     "deny": [],
     "ask": []
