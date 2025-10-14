@@ -1,1 +1,0 @@
-helm install -n dailyfeed dailyfeed-member dailyfeed-backend-chart-0.1.0.tgz -f values-dev-timeline.yaml
