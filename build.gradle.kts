@@ -42,12 +42,12 @@ project(":dailyfeed-member") {
         // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
             // Eclipse Temurin 이미지 사용 (bash 쉘 포함)
-            image = "eclipse-temurin:17-jre"
+            image = "gcr.io/distroless/java17-debian12"
         }
 
         // 타겟 이미지 설정
         to {
-            tags = setOf("0.0.3")
+            tags = setOf("beta-20251015-0001")
             image = "alpha300uk/dailyfeed-member-svc"
         }
 
