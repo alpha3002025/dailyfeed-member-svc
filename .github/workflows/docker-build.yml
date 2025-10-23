@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - develop
-      - env/v1/ci-cd/github-workflow-jib-docker-build-20251023
   workflow_dispatch:
     inputs:
       image_version:
@@ -15,7 +14,7 @@ on:
 
 env:
   # 기본 이미지 버전 (자동 생성: beta-YYYYMMDD-HHMM)
-  DEFAULT_IMAGE_VERSION: beta-${{ github.run_number }}
+  DEFAULT_IMAGE_VERSION: ${{ github.ref_name }}-${{ github.run_number }}
 
 jobs:
   build-and-push:
