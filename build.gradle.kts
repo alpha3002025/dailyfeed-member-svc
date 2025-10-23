@@ -47,7 +47,7 @@ project(":dailyfeed-member") {
         // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
             // Eclipse Temurin 이미지 사용 (bash 쉘 포함)
-            image = "gcr.io/distroless/java17-debian12"
+            image = "eclipse-temurin:17-jre-alpine"
         }
 
         // 타겟 이미지 설정
