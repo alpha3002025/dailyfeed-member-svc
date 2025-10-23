@@ -47,7 +47,9 @@ project(":dailyfeed-member") {
 
         // 타겟 이미지 설정
         to {
-            tags = setOf("beta-20251015-0001")
+            // 환경변수로부터 이미지 버전을 가져오거나 기본값 사용
+            val imageVersion = System.getenv("IMAGE_VERSION") ?: "beta-20251015-0001"
+            tags = setOf(imageVersion)
             image = "alpha300uk/dailyfeed-member-svc"
         }
 
