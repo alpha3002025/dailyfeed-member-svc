@@ -2,7 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.5.5" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
-    id("com.google.cloud.tools.jib") version "3.4.0"
+    id("com.google.cloud.tools.jib") version "3.4.5"
 }
 
 allprojects {
@@ -38,6 +38,11 @@ subprojects {
 }
 
 project(":dailyfeed-member") {
+    // Spring Boot main class 설정
+    tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+        mainClass.set("click.dailyfeed.member.MemberApplication")
+    }
+
     jib {
         // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
@@ -51,15 +56,24 @@ project(":dailyfeed-member") {
             val imageVersion = System.getenv("IMAGE_VERSION") ?: "beta-20251015-0001"
             tags = setOf(imageVersion)
             image = "alpha300uk/dailyfeed-member-svc"
+
+            // Docker Hub 인증 (환경변수에서 가져오기)
+            auth {
+                username = System.getenv("DOCKER_USERNAME") ?: ""
+                password = System.getenv("DOCKER_PASSWORD") ?: ""
+            }
         }
 
-        // Docker 실행 파일 경로 명시
+        // Docker 실행 파일 경로 명시 (로컬 빌드용)
         dockerClient {
             executable = "/usr/local/bin/docker"
         }
 
         // 컨테이너 설정
         container {
+            // Main class 명시
+            mainClass = "click.dailyfeed.member.MemberApplication"
+
             // JVM 옵션
             jvmFlags = listOf(
                 "-XX:+UseContainerSupport",
