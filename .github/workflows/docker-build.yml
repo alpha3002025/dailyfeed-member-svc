@@ -27,9 +27,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -78,27 +75,32 @@ jobs:
         with:
           version: 'latest'
 
+      - name: Clone Helm Repository
+        run: |
+          git clone https://github.com/alpha3002025/dailyfeed-app-helm /tmp/dailyfeed-app-helm
+          echo "Helm repository cloned successfully"
+
       - name: Package Helm Chart
         run: |
-          cd dailyfeed-app-helm/base-chart/dailyfeed-backend-chart
+          cd /tmp/dailyfeed-app-helm/base-chart/dailyfeed-backend-chart
           helm package .
           echo "Helm chart packaged successfully"
 
       - name: Copy Helm Package to Member Directory
         run: |
-          cp dailyfeed-app-helm/base-chart/dailyfeed-backend-chart/dailyfeed-backend-chart-*.tgz \
-             dailyfeed-app-helm/member/
+          cp /tmp/dailyfeed-app-helm/base-chart/dailyfeed-backend-chart/dailyfeed-backend-chart-*.tgz \
+             /tmp/dailyfeed-app-helm/member/
           echo "Helm package copied to member directory"
 
       - name: Update Member values.yaml with Image Tag
         run: |
           sed -i "s/^imageTag:.*/imageTag: ${{ env.IMAGE_VERSION }}/" \
-            dailyfeed-app-helm/member/values.yaml
+            /tmp/dailyfeed-app-helm/member/values.yaml
           echo "Updated imageTag to ${{ env.IMAGE_VERSION }} in values.yaml"
 
       - name: Update install-helm-local.sh Script
         run: |
-          cat > dailyfeed-app-helm/member/install-helm-local.sh << 'EOF'
+          cat > /tmp/dailyfeed-app-helm/member/install-helm-local.sh << 'EOF'
           #!/bin/bash
 
           # Usage: ./install-helm-local.sh <IMAGE_TAG>
@@ -118,13 +120,14 @@ jobs:
             -f values-local-member.yaml \
             --set imageTag=${IMAGE_TAG}
           EOF
-          chmod +x dailyfeed-app-helm/member/install-helm-local.sh
+          chmod +x /tmp/dailyfeed-app-helm/member/install-helm-local.sh
           echo "Updated install-helm-local.sh script"
 
       - name: Commit and Push Helm Changes
         run: |
+          cd /tmp/dailyfeed-app-helm
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add dailyfeed-app-helm/member/
+          git add member/
           git commit -m "chore: update helm chart and config for image version ${{ env.IMAGE_VERSION }}" || echo "No changes to commit"
           git push
