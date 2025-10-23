@@ -47,7 +47,8 @@ project(":dailyfeed-member") {
         // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
             // Eclipse Temurin 이미지 사용 (bash 쉘 포함)
-            image = "eclipse-temurin:17-jre-alpine"
+            // ARM64를 지원하는 버전 사용 (alpine은 ARM64 지원 안함)
+            image = "eclipse-temurin:17-jre"
         }
 
         // 타겟 이미지 설정

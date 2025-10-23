@@ -21,5 +21,5 @@ fi
 # IMAGE_VERSION을 환경변수로 export (gradle에서 사용)
 export IMAGE_VERSION
 
-./gradlew :dailyfeed-member:jibDockerBuild --info
+./gradlew :dailyfeed-member:jibDockerBuild --stacktrace
 docker push alpha300uk/dailyfeed-member-svc:${IMAGE_VERSION}
