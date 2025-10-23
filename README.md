@@ -1,6 +1,20 @@
 
+로컬 실행시
+```bash
+# 방법 1: 환경변수 사용
+IMAGE_VERSION=beta-20251023-0001 ./jibDockerBuild.sh
 
+# 방법 2: 인자 사용
+./jibDockerBuild.sh beta-20251023-0001
+```
 
+<br/>
+
+Github Actions 에서 실행
+1. 수동 실행: Actions 탭에서 "Docker Build and Push" 선택 → Run workflow → 이미지 버전 입력
+2. 자동 실행: main 또는 develop 브랜치에 push하면 자동으로 빌드
+
+<br/>
 
 
 # Troubleshoot
