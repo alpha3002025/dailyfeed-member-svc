@@ -38,6 +38,11 @@ subprojects {
 }
 
 project(":dailyfeed-member") {
+    // Spring Boot main class 설정
+    tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+        mainClass.set("click.dailyfeed.member.MemberApplication")
+    }
+
     jib {
         // Base 이미지 설정 (Java 17 기반, bash 접속 가능)
         from {
