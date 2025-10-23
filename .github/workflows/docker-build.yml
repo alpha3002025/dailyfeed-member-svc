@@ -93,12 +93,6 @@ jobs:
              /tmp/dailyfeed-app-helm/member/
           echo "Helm package copied to member directory"
 
-      - name: Update Member values.yaml with Image Tag
-        run: |
-          sed -i "s/^imageTag:.*/imageTag: ${{ env.IMAGE_VERSION }}/" \
-            /tmp/dailyfeed-app-helm/member/values.yaml
-          echo "Updated imageTag to ${{ env.IMAGE_VERSION }} in values.yaml"
-
       - name: Update install-helm-local.sh Script
         run: |
           cat > /tmp/dailyfeed-app-helm/member/install-helm-local.sh << 'EOF'
