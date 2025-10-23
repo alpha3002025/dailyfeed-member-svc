@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - env/v1/ci-cd/github-workflow-jib-docker-build-20251023
   workflow_dispatch:
     inputs:
       image_version:
@@ -48,18 +49,13 @@ jobs:
           fi
           echo "Selected image version: ${IMAGE_VERSION}"
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and Push Docker Image
+      - name: Build and Push Docker Image with Jib
         run: |
-          chmod +x ./jibDockerBuild.sh
-          ./jibDockerBuild.sh
+          ./gradlew :dailyfeed-member:jib --info
         env:
           IMAGE_VERSION: ${{ env.IMAGE_VERSION }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Summary
         run: |
