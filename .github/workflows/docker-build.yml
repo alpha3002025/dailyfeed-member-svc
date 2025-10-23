@@ -49,6 +49,10 @@ jobs:
           fi
           echo "Selected image version: ${IMAGE_VERSION}"
 
+      - name: Build Project
+        run: |
+          ./gradlew :dailyfeed-member:build -x test --info
+
       - name: Build and Push Docker Image with Jib
         run: |
           ./gradlew :dailyfeed-member:jib --info

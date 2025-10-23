@@ -2,7 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.5.5" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
-    id("com.google.cloud.tools.jib") version "3.4.0"
+    id("com.google.cloud.tools.jib") version "3.4.5"
 }
 
 allprojects {
@@ -66,6 +66,9 @@ project(":dailyfeed-member") {
 
         // 컨테이너 설정
         container {
+            // Main class 명시
+            mainClass = "click.dailyfeed.member.MemberApplication"
+
             // JVM 옵션
             jvmFlags = listOf(
                 "-XX:+UseContainerSupport",
