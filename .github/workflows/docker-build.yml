@@ -69,3 +69,54 @@ jobs:
           echo "- **Tag**: ${{ env.IMAGE_VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Triggered by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Package Helm Chart
+        run: |
+          cd dailyfeed-app-helm/base-chart/dailyfeed-backend-chart
+          helm package .
+          echo "Helm chart packaged successfully"
+
+      - name: Copy Helm Package to Member Directory
+        run: |
+          cp dailyfeed-app-helm/base-chart/dailyfeed-backend-chart/dailyfeed-backend-chart-*.tgz \
+             dailyfeed-app-helm/member/
+          echo "Helm package copied to member directory"
+
+      - name: Update Member values.yaml with Image Tag
+        run: |
+          sed -i "s/^imageTag:.*/imageTag: ${{ env.IMAGE_VERSION }}/" \
+            dailyfeed-app-helm/member/values.yaml
+          echo "Updated imageTag to ${{ env.IMAGE_VERSION }} in values.yaml"
+
+      - name: Update install-helm-local.sh Script
+        run: |
+          cat > dailyfeed-app-helm/member/install-helm-local.sh << 'EOF'
+          #!/bin/bash
+
+          # Usage: ./install-helm-local.sh <IMAGE_TAG>
+          # Example: ./install-helm-local.sh beta-20251023-1234
+
+          if [ -z "$1" ]; then
+            echo "Error: IMAGE_TAG is required"
+            echo "Usage: $0 <IMAGE_TAG>"
+            echo "Example: $0 beta-20251023-1234"
+            exit 1
+          fi
+
+          IMAGE_TAG=$1
+
+          helm install -n dailyfeed dailyfeed-member \
+            dailyfeed-backend-chart-0.1.0.tgz \
+            -f values-local-member.yaml \
+            --set imageTag=${IMAGE_TAG}
+          EOF
+          chmod +x dailyfeed-app-helm/member/install-helm-local.sh
+          echo "Updated install-helm-local.sh script"
+
+      - name: Commit and Push Helm Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dailyfeed-app-helm/member/
+          git commit -m "chore: update helm chart and config for image version ${{ env.IMAGE_VERSION }}" || echo "No changes to commit"
+          git push
