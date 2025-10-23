@@ -76,8 +76,9 @@ jobs:
           version: 'latest'
 
       - name: Clone Helm Repository
+        # HELM_REPO_TOKEN : 추후 Github APP 방식으로 전환 예정 (Github APP 방식은 TOKEN 이 별도로 필요없음)
         run: |
-          git clone https://github.com/alpha3002025/dailyfeed-app-helm /tmp/dailyfeed-app-helm
+          git clone https://x-access-token:${{ secrets.HELM_REPO_TOKEN }}@github.com/alpha3002025/dailyfeed-app-helm /tmp/dailyfeed-app-helm
           echo "Helm repository cloned successfully"
 
       - name: Package Helm Chart
