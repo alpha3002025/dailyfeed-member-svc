@@ -70,6 +70,11 @@ jobs:
           echo "- **Triggered by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'latest'
+
       - name: Package Helm Chart
         run: |
           cd dailyfeed-app-helm/base-chart/dailyfeed-backend-chart
