@@ -42,10 +42,10 @@ jobs:
         id: version
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "IMAGE_VERSION=${{ inputs.image_version }}" >> $GITHUB_ENV
+            echo "IMAGE_VERSION=${{ github.ref_name }}-${{ github.run_number }}" >> $GITHUB_ENV
           else
             # 자동 빌드 시 날짜 기반 버전 생성
-            IMAGE_VERSION="beta-$(date +'%Y%m%d-%H%M')"
+            IMAGE_VERSION="${{github.ref_name}}-$(date +'%Y%m%d-%H%M')"
             echo "IMAGE_VERSION=${IMAGE_VERSION}" >> $GITHUB_ENV
           fi
           echo "Selected image version: ${IMAGE_VERSION}"
