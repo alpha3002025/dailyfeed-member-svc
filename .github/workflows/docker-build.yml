@@ -6,6 +6,7 @@ on:
       - main
       - develop
       - hotfix
+      - sandbox
   workflow_dispatch:
     inputs:
       image_version:
