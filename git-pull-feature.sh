@@ -12,13 +12,6 @@ cd ..
 echo ""
 
 
-echo "dailyfeed-kafka-support"
-cd dailyfeed-kafka-support
-git pull origin $1
-cd ..
-echo ""
-
-
 echo "dailyfeed-member"
 cd dailyfeed-member
 git pull origin $1

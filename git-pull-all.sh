@@ -11,13 +11,6 @@ cd ..
 echo ""
 
 
-echo "dailyfeed-infrastructure"
-cd dailyfeed-infrastructure
-git pull origin main
-cd ..
-echo ""
-
-
 echo "dailyfeed-pagination-support"
 cd dailyfeed-pagination-support
 git pull origin main

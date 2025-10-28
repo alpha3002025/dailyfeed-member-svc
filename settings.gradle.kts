@@ -4,7 +4,6 @@ include(
     "dailyfeed-code",
     "dailyfeed-pagination-support",
     "dailyfeed-redis-support",
-    "dailyfeed-kafka-support",
     "dailyfeed-member",
     "dailyfeed-feign",
 )
