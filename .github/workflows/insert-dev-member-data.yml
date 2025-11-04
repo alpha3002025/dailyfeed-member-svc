@@ -1,0 +1,40 @@
+name: Insert Dev Member Data
+
+jobs:
+  insert-member-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: dailyfeed-member
+
+      - name: Run Integration Test - Insert Member Data
+        env:
+          MYSQL_JDBC_URL: ${{ secrets.MYSQL_JDBC_URL }}
+          MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_SCHEMA: ${{ secrets.MYSQL_SCHEMA }}
+        run: |
+          ./gradlew :dailyfeed-member:test \
+            --tests "click.dailyfeed.member.domain.member.integratedtest.k8s.ImageInsertAndSignupInserDevK8sTest.signupWithImageUploadPerRow" \
+            -Dspring.profiles.active=dev-k8s-test
+        working-directory: .
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: dailyfeed-member/build/test-results/test/
+          retention-days: 7
