@@ -29,7 +29,7 @@ jobs:
           MYSQL_SCHEMA: ${{ secrets.MYSQL_SCHEMA }}
         run: |
           ./gradlew :dailyfeed-member:test \
-            --tests "click.dailyfeed.member.domain.member.integratedtest.k8s.ImageInsertAndSignupInserDevK8sTest.signupWithImageUploadPerRow" \
+            --tests "click.dailyfeed.member.domain.member.integratedtest.k8s.ImageInsertAndSignupInsertDevK8sTest.signupWithImageUploadPerRow" \
             -Dspring.profiles.active=dev-k8s-test
         working-directory: .
 
