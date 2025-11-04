@@ -1,5 +1,8 @@
 name: Insert Dev Member Data
 
+on:
+  workflow_dispatch:
+
 jobs:
   insert-member-data:
     runs-on: ubuntu-latest
