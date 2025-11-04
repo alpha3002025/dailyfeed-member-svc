@@ -1,12 +1,12 @@
 name: Docker Build and Push
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-      - hotfix
-      - sandbox
+#  push:
+#    branches:
+#      - main
+#      - develop
+#      - hotfix
+#      - sandbox
   workflow_dispatch:
     inputs:
       image_version:
@@ -58,6 +58,11 @@ jobs:
       - name: Build Project
         run: |
           ./gradlew :dailyfeed-member:build -x test --info
+        env:
+          MYSQL_JDBC_URL: ${{ secrets.MYSQL_JDBC_URL }}
+          MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_SCHEMA: ${{ secrets.MYSQL_SCHEMA }}
 
       - name: Build and Push Docker Image with Jib
         run: |
@@ -66,6 +71,11 @@ jobs:
           IMAGE_VERSION: ${{ env.IMAGE_VERSION }}
           GITHUB_USERNAME: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MYSQL_JDBC_URL: ${{ secrets.MYSQL_JDBC_URL }}
+          MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_SCHEMA: ${{ secrets.MYSQL_SCHEMA }}
+          MONGODB_CONNECTION_URI: ${{ secrets.MONGODB_CONNECTION_URI }}
 
       - name: Build Summary
         run: |
