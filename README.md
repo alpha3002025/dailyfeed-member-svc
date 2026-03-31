@@ -206,6 +206,27 @@ include(“dailyfeed-redis-support”)
 
 <br/>
 
+# 테스트 Profile
+- 테스트를 수행시킬수 있는 profile 은 `local`, `local-was` 를 준비해두었습니다.
+- 테스트에서 사용하는 인프라의 경우 `local`, `local-was`, `local-k8s-test` 프로필을 선택해서 진행하면 됩니다.
+
+
+각 프로필 `local`, `local-was`, `local-k8s-test` 에 대한 인프라 설치 코드는 dailyfeed-installer/dailyfeed-infrastructure/docker/{프로필명} 에 정의되어 있습니다.
+
+가급적 local-was 기반의 제한된 인프라범위에서의 테스트를 권장합니다.<br/>
+<br/>
+
+## 테스트를 위한 docker 실행
+e.g. local-was 프로필에 대한 환경에 대한 docker-compose 실행
+```bash
+## dailyfeed-infrastructure 디렉터리로 이동
+cd dailyfeed-installer/dailyfeed-infrastructure
+cd docker/local-was
+
+## docker-compose 실행
+docker-compse up -d
+```
+<br/>
 
 
 # 테스트 회원 데이터 insert
