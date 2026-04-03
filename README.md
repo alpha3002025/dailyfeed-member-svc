@@ -169,6 +169,13 @@ git clone dailyfeed-member-svc
 cd dailyfeed-member-svc
 git submodule init
 git submodule update
+git submodule foreach 'git checkout main && git pull origin main'
+
+# 또는 클론 후 submodule 초기화를 한번에 수행
+git clone dailyfeed-member-svc
+cd dailyfeed-member-svc
+git submodule update --init --recursive
+git submodule foreach 'git checkout main && git pull origin main'
 ```
 
 
